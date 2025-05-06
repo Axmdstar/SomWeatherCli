@@ -1,0 +1,285 @@
+{
+"wmo_codes":{ 
+	"0":{
+		"day":{
+			"description":"Sunny",
+			"emoji":"☀️"
+		},
+		"night":{
+			"description":"Clear",
+			"emoji":"🌕"
+		}
+	},
+	"1":{
+		"day":{
+			"description":"Mainly Sunny",
+			"emoji":"🌤️"
+		},
+		"night":{
+			"description":"Mainly Clear",
+			"emoji":"🌑"
+		}
+	},
+	"2":{
+		"day":{
+			"description":"Partly Cloudy",
+			"emoji":"🌥️"
+		},
+		"night":{
+			"description":"Partly Cloudy",
+			"emoji":"🌥️"
+		}
+	},
+	"3":{
+		"day":{
+			"description":"Cloudy",
+			"emoji":"☁️"
+		},
+		"night":{
+			"description":"Cloudy",
+			"emoji":"☁️"
+
+		}
+	},
+	"45":{
+		"day":{
+			"description":"Foggy",
+			"emoji":"🌫️"
+		},
+		"night":{
+			"description":"Foggy",
+			"emoji":"🌫️"
+		}
+	},
+	"48":{
+		"day":{
+			"description":"Rime Fog",
+			"emoji":"🌁"
+		},
+		"night":{
+			"description":"Rime Fog",
+			"emoji":"🌁"
+		}
+	},
+	"51":{
+		"day":{
+			"description":"Light Drizzle",
+			"emoji":"💦"
+		},
+		"night":{
+			"description":"Light Drizzle",
+			"emoji":"💦"
+		}
+	},
+	"53":{
+		"day":{
+			"description":"Drizzle",
+			"emoji":"☔"
+		},
+		"night":{
+			"description":"Drizzle",
+			"emoji":"☔"
+		}
+	},
+	"55":{
+		"day":{
+			"description":"Heavy Drizzle",
+			"emoji":"🌧️"
+		},
+		"night":{
+			"description":"Heavy Drizzle",
+			"emoji":"🌧️"
+		}
+	},
+	"56":{
+		"day":{
+			"description":"Light Freezing Drizzle",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Light Freezing Drizzle",
+			"emoji":"🌨️"
+		}
+	},
+	"57":{
+		"day":{
+			"description":"Freezing Drizzle",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Freezing Drizzle",
+			"emoji":"🌨️"
+		}
+	},
+	"61":{
+		"day":{
+			"description":"Light Rain",
+			"emoji":"🌦️"
+		},
+		"night":{
+			"description":"Light Rain",
+			"emoji":"🌦️"
+		}
+	},
+	"63":{
+		"day":{
+			"description":"Rain",
+			"emoji":"🌧️"
+		},
+		"night":{
+			"description":"Rain",
+			"emoji":"🌧️"
+		}
+	},
+	"65":{
+		"day":{
+			"description":"Heavy Rain",
+			"emoji":"⛈️"
+		},
+		"night":{
+			"description":"Heavy Rain",
+			"emoji":"⛈️"
+		}
+	},
+	"66":{
+		"day":{
+			"description":"Light Freezing Rain",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Light Freezing Rain",
+			"emoji":"🌨️"
+		}
+	},
+	"67":{
+		"day":{
+			"description":"Freezing Rain",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Freezing Rain",
+			"emoji":"🌨️"
+		}
+	},
+	"71":{
+		"day":{
+			"description":"Light Snow",
+			"emoji":"❄️"
+		},
+		"night":{
+			"description":"Light Snow",
+			"emoji":"❄️"
+		}
+	},
+	"73":{
+		"day":{
+			"description":"Snow",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Snow",
+			"emoji":"🌨️"
+		}
+	},
+	"75":{
+		"day":{
+			"description":"Heavy Snow",
+			"emoji":"❄️☃️"
+		},
+		"night":{
+			"description":"Heavy Snow",
+			"emoji":"❄️☃️"
+		}
+	},
+	"77":{
+		"day":{
+			"description":"Snow Grains",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Snow Grains",
+			"emoji":"🌨️"
+		}
+	},
+	"80":{
+		"day":{
+			"description":"Light Showers",
+			"emoji":"🌦️"
+		},
+		"night":{
+			"description":"Light Showers",
+			"emoji":"🌦️"
+		}
+	},
+	"81":{
+		"day":{
+			"description":"Showers",
+			"emoji":"🌧️"
+		},
+		"night":{
+			"description":"Showers",
+			"emoji":"🌧️"
+		}
+	},
+	"82":{
+		"day":{
+			"description":"Heavy Showers",
+			"emoji":"⛈️"
+		},
+		"night":{
+			"description":"Heavy Showers",
+			"emoji":"⛈️"
+		}
+	},
+	"85":{
+		"day":{
+			"description":"Light Snow Showers",
+			"emoji":"🌨️"
+		},
+		"night":{
+			"description":"Light Snow Showers",
+			"emoji":"🌨️"
+		}
+	},
+	"86":{
+		"day":{
+			"description":"Snow Showers",
+			"emoji":"❄️"
+		},
+		"night":{
+			"description":"Snow Showers",
+			"emoji":"❄️"
+		}
+	},
+	"95":{
+		"day":{
+			"description":"Thunderstorm",
+			"emoji":"⛈️"
+		},
+		"night":{
+			"description":"Thunderstorm",
+			"emoji":"⛈️"
+		}
+	},
+	"96":{
+		"day":{
+			"description":"Light Thunderstorms With Hail",
+			"emoji":"🌩️"
+		},
+		"night":{
+			"description":"Light Thunderstorms With Hail",
+			"emoji":"🌩️"
+		}
+	},
+	"99":{
+		"day":{
+			"description":"Thunderstorm With Hail",
+			"emoji":"🌩️"
+		},
+		"night":{
+			"description":"Thunderstorm With Hail",
+			"emoji":"🌩️"
+		}
+	}
+  }
+}
