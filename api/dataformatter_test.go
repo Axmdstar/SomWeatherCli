@@ -3,31 +3,15 @@ package api_test
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"os"
+	"strconv"
 	"testing"
 
 	"somweathercli/api"
 )
 
-func GetWmoCodefile() ([]byte, error) {
-	file, err := os.Open("wmo_code.json")
-	if err != nil {
-		return nil, err
-	}
-
-	dataR, err := io.ReadAll(file)
-	if err != nil {
-		fmt.Println(err)
-		return nil, err
-	}
-
-	return dataR, nil
-}
-
 func Test_WmoCode(t *testing.T) {
 	t.Run("Read Wmo Code from json file", func(t *testing.T) {
-		dataR, err := GetWmoCodefile()
+		dataR, err := api.GetWmoCodefile()
 		if err != nil {
 			t.Error("Error Opening file")
 		}
@@ -82,7 +66,7 @@ func Test_WmoCode(t *testing.T) {
   }
 }
  `
-		dataR, err := GetWmoCodefile()
+		dataR, err := api.GetWmoCodefile()
 		if err != nil {
 			t.Error("Error Opening file")
 		}
@@ -100,6 +84,22 @@ func Test_WmoCode(t *testing.T) {
 		err = json.Unmarshal(dataR, dummyWmoCode)
 		if err != nil {
 			t.Error(err)
+		}
+
+		wcode := strconv.Itoa(dummyCurrentWther.Current.WeatherCode)
+		emoji, description, err := api.GetWmoCodeData(wcode)
+		if err != nil {
+			t.Error(err)
+		}
+
+		want := "☁️"
+		wantdes := "Cloudy"
+		if emoji != want {
+			t.Errorf("got %v Want %v ", emoji, want)
+		}
+
+		if description != wantdes {
+			t.Errorf("got %v Want %v ", description, wantdes)
 		}
 
 		// date, clock :=	api.DateTimeStrings(dummyCurrentWther.Current.Time)

@@ -17,7 +17,7 @@ var CurrentCmd = &cobra.Command{
 		if err != nil {
 			fmt.Printf("Error: %v", err)
 		}
-		api.CurrentWtherformatter(data)
+		fmt.Println(api.CurrentWtherformatter(data))
 	},
 }
 

@@ -28,15 +28,15 @@ type currentunits struct {
 
 type current struct {
 	Time        string `json:"time"`
-	Interval    int32  `json:"interval"`
-	WeatherCode int32  `json:"weather_code"`
+	Interval    int    `json:"interval"`
+	WeatherCode int    `json:"weather_code"`
 }
 
 type CurrentWther struct {
 	Latitude             float32      `json:"latitude"`
 	Longitude            float32      `json:"longitude"`
 	GenerationtimeMs     float64      `json:"generationtime_ms"`
-	UtcOffsetSeconds     int32        `json:"utc_offset_seconds"`
+	UtcOffsetSeconds     int          `json:"utc_offset_seconds"`
 	TimeZone             string       `json:"timezone"`
 	TimeZoneAbbreviation string       `json:"timezone_abbreviation"`
 	Elevation            float64      `json:"elevation"`
