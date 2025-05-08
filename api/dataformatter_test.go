@@ -77,7 +77,6 @@ func Test_WmoCode(t *testing.T) {
 		if err != nil {
 			t.Error(err)
 		}
-		// fmt.Printf("dummy Struct Current Weather: %v ", dummyCurrentWther)
 
 		// Create Struct for Dummy Wmo Code
 		dummyWmoCode := api.NewWmoCode()
@@ -101,7 +100,53 @@ func Test_WmoCode(t *testing.T) {
 		if description != wantdes {
 			t.Errorf("got %v Want %v ", description, wantdes)
 		}
-
 		// date, clock :=	api.DateTimeStrings(dummyCurrentWther.Current.Time)
+	})
+
+	t.Run("Daily Weather Format", func(t *testing.T) {
+		// Api Dummy
+		dummyDaliyWeather := `
+	{
+  "latitude": 5.125,
+  "longitude": 46.25,
+  "generationtime_ms": 0.019073486328125,
+  "utc_offset_seconds": 10800,
+  "timezone": "Africa/Cairo",
+  "timezone_abbreviation": "GMT+3",
+  "elevation": 241.0,
+  "daily_units": {
+"time": "iso8601",
+"weather_code": "wmo code"
+  },
+  "daily": {
+    "time": [
+      "2025-05-08",
+      "2025-05-09",
+      "2025-05-10",
+      "2025-05-11",
+      "2025-05-12",
+      "2025-05-13",
+      "2025-05-14"
+    ],
+    "weather_code": [
+      96,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2
+    ]
+  }
+  }
+   	`
+		daliyDummy := api.NewDailyWeather()
+		err := json.Unmarshal([]byte(dummyDaliyWeather), daliyDummy)
+		if err != nil {
+			t.Errorf("Error umarshal Daliy json : %v", err)
+		}
+		fmt.Println(daliyDummy)
+
+		api.DailyWeatherFormatter(daliyDummy)
 	})
 }

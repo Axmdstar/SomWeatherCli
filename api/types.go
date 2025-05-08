@@ -76,3 +76,63 @@ type WmoCodeArray struct {
 func NewWmoCode() *WmoCodeArray {
 	return &WmoCodeArray{}
 }
+
+// {
+//   "latitude": 5.125,
+//   "longitude": 46.25,
+//   "generationtime_ms": 0.019073486328125,
+//   "utc_offset_seconds": 10800,
+//   "timezone": "Africa/Cairo",
+//   "timezone_abbreviation": "GMT+3",
+//   "elevation": 241.0,
+//   "daily_units": {
+// "time": "iso8601",
+// "weather_code": "wmo code"
+//   },
+//   "daily": {
+//     "time": [
+//       "2025-05-08",
+//       "2025-05-09",
+//       "2025-05-10",
+//       "2025-05-11",
+//       "2025-05-12",
+//       "2025-05-13",
+//       "2025-05-14"
+//     ],
+//     "weather_code": [
+//       96,
+//       3,
+//       3,
+//       3,
+//       2,
+//       2,
+//       2
+//     ]
+//   }
+// }
+
+type dailyUnits struct {
+	Time        string `json:"time"`
+	WeatherCode string `json:"weather_code"`
+}
+
+type daily struct {
+	Time        []string `json:"time"`
+	WeatherCode []int    `json:"weather_code"`
+}
+
+type DailyWeather struct {
+	Latitude             float32    `json:"latitude"`
+	Longitude            float32    `json:"longitude"`
+	GenerationtimeMs     float64    `json:"generationtime_ms"`
+	UtcOffsetSeconds     int        `json:"utc_offset_seconds"`
+	TimeZone             string     `json:"timezone"`
+	TimeZoneAbbreviation string     `json:"timezone_abbreviation"`
+	Elevation            float64    `json:"elevation"`
+	DailyUnits           dailyUnits `json:"daily_units"`
+	Daily                daily      `json:"daily"`
+}
+
+func NewDailyWeather() *DailyWeather {
+	return &DailyWeather{}
+}

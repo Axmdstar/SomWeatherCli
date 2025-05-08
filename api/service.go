@@ -44,3 +44,30 @@ func GetCurrentWthr() (*CurrentWther, error) {
 
 	return data, nil
 }
+
+var endpoint2 string = "https://api.open-meteo.com/v1/forecast?latitude=5.1521&longitude=46.1996&daily=weather_code&timezone=Africa%2FCairo"
+
+func GetDailyWthr() (*DailyWeather, error) {
+	res, err := http.Get(endpoint2)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	defer res.Body.Close()
+
+	dataR, err := io.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	data := NewDailyWeather()
+	err = json.Unmarshal(dataR, data)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	return data, nil
+}

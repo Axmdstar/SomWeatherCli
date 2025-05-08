@@ -17,7 +17,11 @@ var CurrentCmd = &cobra.Command{
 		if err != nil {
 			fmt.Printf("Error: %v", err)
 		}
-		fmt.Println(api.CurrentWtherformatter(data))
+		date, clock, description, emoji := api.CurrentWtherformatter(data)
+		dataArray := [][]string{
+			{date, clock, description, emoji},
+		}
+		api.WriteTableCurrent(dataArray)
 	},
 }
 

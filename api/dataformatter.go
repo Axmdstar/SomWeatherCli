@@ -11,7 +11,10 @@ import (
 )
 
 func GetWmoCodefile() ([]byte, error) {
-	file, err := os.Open("./api/wmo_code.json")
+	// testpath := "./wmo_code.json"
+	production := "./api/wmo_code.json"
+
+	file, err := os.Open(production)
 	if err != nil {
 		return nil, err
 	}
@@ -30,7 +33,14 @@ func DateTimeStrings(dateStr string) (string, string, error) {
 	var date strings.Builder
 	var clock strings.Builder
 
-	parsedTime, err := time.Parse("2006-01-02T15:04", dateStr)
+	var dateformat string
+	if strings.Contains(dateStr, "T") {
+		dateformat = "2006-01-02T15:04"
+	} else {
+		dateformat = "2006-01-02"
+	}
+
+	parsedTime, err := time.Parse(dateformat, dateStr)
 	if err != nil {
 		return "", "", err
 	}
@@ -63,11 +73,10 @@ func GetWmoCodeData(code string) (emoji, description string, Error error) {
 		fmt.Println(err)
 		return "", "", err
 	}
-	fmt.Println(WmoCode.WmoCodes[code])
 	return WmoCode.WmoCodes[code].Day.Emoji, WmoCode.WmoCodes[code].Day.Description, nil
 }
 
-func CurrentWtherformatter(data *CurrentWther) string {
+func CurrentWtherformatter(data *CurrentWther) (string, string, string, string) {
 	// get wmo_code
 	file, err := os.Open("./api/wmo_code.json")
 	if err != nil {
@@ -91,14 +100,55 @@ func CurrentWtherformatter(data *CurrentWther) string {
 		fmt.Println(err)
 	}
 
-	fmt.Println(date, clock)
-
 	code := strconv.Itoa(data.Current.WeatherCode)
 	emoji, description, err := GetWmoCodeData(code)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(emoji, description)
-	return fmt.Sprintf("date %v, clock %v, emoji %v, description %v", date, clock, emoji, description)
+	return date, clock, emoji, description
+}
+
+func DailyWeatherFormatter(data *DailyWeather) [][]string {
+	// get wmo_code
+	file, err := os.Open("./api/wmo_code.json")
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	dataR, err := io.ReadAll(file)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	// fmt.Println(string(dataR))
+	wmocodeArray := NewWmoCode()
+	err = json.Unmarshal(dataR, wmocodeArray)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	var dailyWeather [][]string
+	for i := range data.Daily.Time {
+
+		date, clock, err := DateTimeStrings(data.Daily.Time[i])
+		if err != nil {
+			fmt.Println(err)
+			return nil
+		}
+
+		code := strconv.Itoa(data.Daily.WeatherCode[i])
+		emoji, description, err := GetWmoCodeData(code)
+		if err != nil {
+			fmt.Println(err)
+			return nil
+		}
+
+		dailyWeather = append(dailyWeather, []string{date, clock, description, emoji})
+	}
+
+	return dailyWeather
 }
