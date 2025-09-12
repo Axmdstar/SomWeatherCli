@@ -1,0 +1,42 @@
+name: SomPipeline
+
+# Trigger the workflow on push or pull request events to the main branch
+on:
+  # on is a trigger, it can be push, pull_request, etc.
+  push:
+    # we can specify branches, we want trigger to be applied
+    branches:
+      # or list of branches like this
+      # - develop
+      # [...]
+      - main
+
+# Jobs define what the workflow will do, a series of steps
+jobs:
+  build:
+    # run the job on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    # steps define the sequence of tasks to be executed
+    steps:
+      # first step is to checkout the repository, so we have access to the code
+      # uses keyword is used to specify an action from the GitHub Marketplace
+      # here we use the checkout action to clone the repository
+      # the @v2 specifies the version of the action to use
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+    # next step is to set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'  # specify the Go version to use
+
+      # next step is to install dependencies
+      - name: Install dependencies
+        run: go mod download
+
+      # next step is to run tests
+      - name: Run tests
+        run: go test ./...
+
+
