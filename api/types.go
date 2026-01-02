@@ -1,5 +1,8 @@
 package api
 
+// NOTE: Structs to unmarshal Open-Meteo API responses
+
+// NOTE: Current Weather API Response Example
 // {
 //   "latitude": 6.0,
 //   "longitude": 48.0,

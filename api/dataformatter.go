@@ -10,7 +10,10 @@ import (
 	"time"
 )
 
+// GetWmoCodefile reads the wmo_code.json file and returns its content as a byte slice
 func GetWmoCodefile() ([]byte, error) {
+	// NOTE: wmo_code.json contains weather codes, descriptions, and emojis
+
 	// testpath := "./wmo_code.json"
 	production := "./api/wmo_code.json"
 
@@ -28,11 +31,17 @@ func GetWmoCodefile() ([]byte, error) {
 	return dataR, nil
 }
 
-// returns date and clock
+// DateTimeStrings returns date and clock
+// from a given date string in the format "2006-01-02" or "2006-01-02T15:04"
+// Example: "2025-05-04T15:15" -> "2025/May/04", "15:15"
 func DateTimeStrings(dateStr string) (string, string, error) {
+	// prepare date and clock strings
+	// to used in table
+	// string builders let's us build strings efficiently
 	var date strings.Builder
 	var clock strings.Builder
 
+	// determine the date format based on the presence of 'T'
 	var dateformat string
 	if strings.Contains(dateStr, "T") {
 		dateformat = "2006-01-02T15:04"
@@ -40,17 +49,20 @@ func DateTimeStrings(dateStr string) (string, string, error) {
 		dateformat = "2006-01-02"
 	}
 
+	// parse the date string
 	parsedTime, err := time.Parse(dateformat, dateStr)
 	if err != nil {
 		return "", "", err
 	}
 
+	// format date as "YYYY/Month/DD"
 	date.WriteString(strconv.Itoa(parsedTime.Year()))
 	date.WriteString("/")
 	date.WriteString(parsedTime.Month().String())
 	date.WriteString("/")
 	date.WriteString(strconv.Itoa(parsedTime.Day()))
 
+	// format clock as "HH:MM"
 	h, m, _ := parsedTime.Clock()
 	clock.WriteString(strconv.Itoa(h))
 	clock.WriteString(":")
@@ -59,14 +71,16 @@ func DateTimeStrings(dateStr string) (string, string, error) {
 	return date.String(), clock.String(), nil
 }
 
-// Returns Emoji and description
+// GetWmoCodeData Returns Emoji and description
 func GetWmoCodeData(code string) (emoji, description string, Error error) {
+	// get wmo_code
 	dataR, err := GetWmoCodefile()
 	if err != nil {
 		fmt.Println(err)
 		return "", "", err
 	}
 
+	// create WmoCodeArray instance
 	WmoCode := NewWmoCode()
 	err = json.Unmarshal(dataR, WmoCode)
 	if err != nil {
@@ -76,6 +90,7 @@ func GetWmoCodeData(code string) (emoji, description string, Error error) {
 	return WmoCode.WmoCodes[code].Day.Emoji, WmoCode.WmoCodes[code].Day.Description, nil
 }
 
+// CurrentWtherformatter formats current weather data
 func CurrentWtherformatter(data *CurrentWther) (string, string, string, string) {
 	// get wmo_code
 	file, err := os.Open("./api/wmo_code.json")
@@ -109,6 +124,7 @@ func CurrentWtherformatter(data *CurrentWther) (string, string, string, string) 
 	return date, clock, emoji, description
 }
 
+// DailyWeatherFormatter formats daily weather data
 func DailyWeatherFormatter(data *DailyWeather) [][]string {
 	// get wmo_code
 	file, err := os.Open("./api/wmo_code.json")
